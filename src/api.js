@@ -53,7 +53,9 @@ export async function fetchFeed(code, { fetch = globalThis.fetch } = {}) {
   let response;
   try {
     response = await fetch(`${BASE_URL}${encodeURIComponent(code)}`, {
-      headers: { 'user-agent': USER_AGENT, accept: 'application/rss+xml, application/xml' },
+      // Any Accept naming XML types gets a 406: the server answers
+      // `application/xml+rss`, which it only serves to */*.
+      headers: { 'user-agent': USER_AGENT, accept: '*/*' },
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
   } catch (err) {

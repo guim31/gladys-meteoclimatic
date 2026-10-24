@@ -253,6 +253,9 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
   compte ni clé. `<code>` est une station (`ESCAT0800000008350A`) ou une zone (`ES`, `ESCAT`,
   `ESCAT08`, `PT`, `AD`). Les codes de la Communauté valencienne commencent par `ESPVA`, pas
   `ESVAL` (vérifié le 24/10/2026 : `ESVAL` répond un flux vide).
+- **En-tête `Accept`** : tout `Accept` qui nomme des types XML (`application/rss+xml, application/xml`)
+  reçoit un **HTTP 406** (le serveur sert `application/xml+rss`) ; envoyer `*/*`. Trouvé par le test
+  réel dans le conteneur, le faux réseau des tests le reproduit.
 - **Encodage ISO-8859-15**, entités HTML dans les noms (`Alcorc&#243;n`) : décodé par
   `TextDecoder('iso-8859-15')` (ICU complet, présent dans l'image node:alpine officielle).
 - **Lire le bloc de données en commentaire**, pas le HTML : `[[<CODE;(t;tmax;tmin;ciel);(h;hmax;hmin);

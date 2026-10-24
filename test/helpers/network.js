@@ -73,6 +73,11 @@ export function createNetwork({ feeds = {}, now = () => Date.now() } = {}) {
     if (!match) {
       throw Object.assign(new TypeError('fetch failed'), { cause: { code: 'ENOTFOUND' } });
     }
+    // Like the real server (checked 2026-10-24): an Accept naming XML types is a 406.
+    const accept = options.headers?.accept;
+    if (accept !== undefined && accept !== '*/*') {
+      return new Response('Not Acceptable', { status: 406 });
+    }
     const route = feeds[match[1]] ?? feed('empty');
     const value = typeof route === 'function' ? route(now()) : route;
     if (value instanceof Error) {
