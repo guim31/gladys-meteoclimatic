@@ -1,41 +1,51 @@
 // -----------------------------------------------------------------------------
-// Scene actions (SDK v0.14+, Gladys 5.1+).
+// Scene action "Get the station readings" (Gladys 5.1+).
 //
-// A scene action is an OPERATION a scene author places in a scene, with
-// parameters and a result: "identify this device", "take a snapshot", "clean
-// these rooms". Each one is declared in the manifest `scene_actions` field
-// (key, label, `fields` in the config_schema grammar, scalar `outputs`) and
-// handled here, keyed by that same `key`; index.js registers every entry with
-// `gladys.onSceneAction(key, ...)`.
+// Gives a scene the last reading of one station (the first added one when
+// none is chosen), as outputs a notification can quote: "{{...summary}}"
+// reads "Meteoclimatic Arenys de Mar · 14,8 °C · 82 % · Vent 0 km/h · Pluie du
+// jour 2 mm · il y a 3 min". The devices already give each value to the scene
+// conditions; what this action adds is a ready-made sentence, and the values
+// of a station in one step.
 //
-// Scene TRIGGERS are the other direction ("this happened"): they are fired by
-// the device that observes the event, see src/devices/motionSensor.js.
-//
-// The rules that matter:
-//   - `fields` arrive RESOLVED: scene variables substituted, defaults applied,
-//     validated by the core; a `"source": "devices"` field is the chosen
-//     device external_id;
-//   - resolve an object of the declared `outputs` (scalars only), readable by
-//     the following actions of the scene, or `undefined` for none. Keys not
-//     declared in the manifest are dropped by the core;
-//   - throwing fails THIS action only: the scene logs it and continues. A
-//     scene action is never a condition: return an output and let the scene
-//     author gate on it;
-//   - never fire a scene event as a consequence of a received action: a scene
-//     bound to that event would loop through the integration.
+// The triggers are fired by the hub (src/hub.js, src/triggers.js).
 // -----------------------------------------------------------------------------
 
-import { createLogger } from '@gladysassistant/integration-sdk';
-import { signalDevice } from './devices/index.js';
+import { MESSAGES, TEXT } from './i18n.js';
 
-const logger = createLogger({ name: 'scenes' });
+export const GET_READINGS = 'get_readings';
 
-export const SCENE_ACTIONS = {
-  // The ack is awaited under the action's `timeout_seconds` (15 s in the
-  // manifest), counted from the moment the scene reaches the action.
-  async identify_device(gladys, { fields, config }) {
-    logger.info(`Scene action identify_device <- ${fields.device}`);
-    const signalled = await signalDevice(gladys, fields.device, config);
-    return { signalled };
-  },
-};
+/**
+ * @param {import('./hub.js').Hub} hub
+ * @param {{ station?: string }} fields
+ * @param {string} language
+ */
+export function getReadings(hub, fields, language) {
+  const created = hub.configuredRecords().filter((record) => hub.isCreated(record));
+  const record = fields.station
+    ? created.find((candidate) => candidate === hub.recordByDevice(fields.station))
+    : created[0];
+  const minutes = hub.ageMinutes(record);
+  if (!record || minutes === null) {
+    throw new Error(MESSAGES.thrown(TEXT.noReading));
+  }
+  const stale = hub.isStale(record);
+  // A stale reading gives no value: only its age and the sentence say it.
+  const values = stale ? {} : record.values;
+  const outputs = {
+    station: hub.nameOf(record),
+    temperature: values.temperature ?? null,
+    temperature_max: values.temperature_max ?? null,
+    temperature_min: values.temperature_min ?? null,
+    humidity: values.humidity ?? null,
+    pressure: values.pressure ?? null,
+    wind_speed: values.wind_speed ?? null,
+    wind_max: values.wind_max ?? null,
+    rain_today: values.rain_today ?? null,
+    age_minutes: minutes,
+    online: !stale,
+    summary: MESSAGES.summary({ name: hub.nameOf(record), values, minutes, stale })[language],
+  };
+  // A measure the station does not have is left out (null for the scene).
+  return Object.fromEntries(Object.entries(outputs).filter(([, value]) => value !== null));
+}

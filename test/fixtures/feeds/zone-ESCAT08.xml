@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss"
+>
+ <channel>
+  <title>Meteoclimatic - RSS</title>
+  <link>http://meteoclimatic.net/</link>
+  <description>Meteoclimatic - RSS</description>
+  <copyright>Creative Commons - Attribution-NonCommercial-NoDerivs 3.0 Unported</copyright>
+  <language>es</language>
+  <ttl>60</ttl>
+  <pubDate>Sat, 24 Oct 2026 19:34:20 +0000</pubDate>
+  <image>
+   <title>Meteoclimatic - RSS</title>
+   <url>http://meteoclimatic.net/img/rss.gif</url>
+   <link>http://meteoclimatic.net/</link>
+  </image>
+
+  <docs>http://meteoclimatic.net/index/wp/rss_es.html</docs>  <item>
+   <title>Arenys de Mar (Barcelona)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCAT0800000008350A</link>
+   <pubDate>Sat, 24 Oct 2026 19:09:00 +0000</pubDate>
+   <guid>3dde2774ebc49aa1daba12063638f0c9</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_tpv.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESCAT0800000008350A">Arenys de Mar</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:09 UTC</li>
+<li>Temperatura: <b>14,8</b> &#186;C (
+M&#225;x.: <b style="color: red">20,1</b> / 
+M&#237;n.: <b style="color: blue">12,9</b> )</li>
+<li>Humedad: <b>82,0</b> % (
+M&#225;x.: <b style="color: red">89,0</b> / 
+M&#237;n.: <b style="color: blue">70,0</b> )</li>
+<li>Bar&#243;metro: <b>1020,1</b> hPa (
+M&#225;x.: <b style="color: red">1022,9</b> / 
+M&#237;n.: <b style="color: blue">1019,7</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">21,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>236</b> - WSW</li>
+<li>Precip.: <b>2,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCAT0800000008350A:DATA>]]
+[[<ESCAT0800000008350A;(14,8;20,1;12,9;hazemoon);(82,0;89,0;70,0);(1020,1;1022,9;1019,7);(0,0;21,0;236);(2,0);Arenys de Mar>]]
+[[<END:ESCAT0800000008350A:DATA>]]
+-->
+   </description>
+   <georss:point>41.59 2.56</georss:point>
+   <geo:Point>
+    <geo:lat>41.59</geo:lat>
+    <geo:long>2.56</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Arenys de Munt (Barcelona)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCAT0800000008358A</link>
+   <pubDate>Sat, 24 Oct 2026 19:20:00 +0000</pubDate>
+   <guid>6a33173c35e08f8e14298c882c57d8a5</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/ESCAT0800000008358A">Arenys de Munt</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:20 UTC</li>
+<li>Temperatura: <b>13,0</b> &#186;C (
+M&#225;x.: <b style="color: red">18,6</b> / 
+M&#237;n.: <b style="color: blue">12,3</b> )</li>
+<li>Humedad: <b>82,0</b> % (
+M&#225;x.: <b style="color: red">83,0</b> / 
+M&#237;n.: <b style="color: blue">69,0</b> )</li>
+<li>Bar&#243;metro: <b>1024,8</b> hPa (
+M&#225;x.: <b style="color: red">1027,8</b> / 
+M&#237;n.: <b style="color: blue">1024,1</b> )</li>
+<li>Viento: <b>2,0</b> km/h (
+M&#225;x.: <b style="color: red">21,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>338</b> - NNW</li>
+<li>Precip.: <b>3,6</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCAT0800000008358A:DATA>]]
+[[<ESCAT0800000008358A;(13,0;18,6;12,3;hazemoon);(82,0;83,0;69,0);(1024,8;1027,8;1024,1);(2,0;21,0;338);(3,6);Arenys de Munt>]]
+[[<END:ESCAT0800000008358A:DATA>]]
+-->
+   </description>
+   <georss:point>41.61 2.54</georss:point>
+   <geo:Point>
+    <geo:lat>41.61</geo:lat>
+    <geo:long>2.54</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Badalona - Bufal&#224; (Barcelona)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCAT0800000008915A</link>
+   <pubDate>Sat, 24 Oct 2026 19:25:03 +0000</pubDate>
+   <guid>2bc2327be8b5dca807ffccca78183303</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_obs.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESCAT0800000008915A">Badalona - Bufal&#224;</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:25 UTC</li>
+<li>Temperatura: <b>15,0</b> &#186;C (
+M&#225;x.: <b style="color: red">18,7</b> / 
+M&#237;n.: <b style="color: blue">12,8</b> )</li>
+<li>Humedad: <b>72,0</b> % (
+M&#225;x.: <b style="color: red">80,0</b> / 
+M&#237;n.: <b style="color: blue">62,0</b> )</li>
+<li>Bar&#243;metro: <b>1022,8</b> hPa (
+M&#225;x.: <b style="color: red">1025,9</b> / 
+M&#237;n.: <b style="color: blue">1022,3</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">8,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>0</b> - N</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCAT0800000008915A:DATA>]]
+[[<ESCAT0800000008915A;(15,0;18,7;12,8;hazemoon);(72,0;80,0;62,0);(1022,8;1025,9;1022,3);(0,0;8,0;0);(0,0);Badalona - Bufal&#224;>]]
+[[<END:ESCAT0800000008915A:DATA>]]
+-->
+   </description>
+   <georss:point>41.46 2.24</georss:point>
+   <geo:Point>
+    <geo:lat>41.46</geo:lat>
+    <geo:long>2.24</geo:long>
+   </geo:Point>
+  </item>
+</channel>
+</rss>

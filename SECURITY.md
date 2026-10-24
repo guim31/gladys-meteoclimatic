@@ -30,6 +30,18 @@ Gladys before reporting a problem.
 
 In scope: the code of this repository and the Docker image it publishes.
 
+What the integration handles:
+
+- **No secret.** The public RSS feeds of Meteoclimatic need no account nor key.
+- **`/data`** holds `stations.json`: the name, approximate public position,
+  measures and last reading of each configured station. No personal data
+  beyond what the public map already shows.
+- **The house location** (Gladys `location` authorization) is read only when
+  the user clicks "Find stations near a house". The distances are computed in
+  the container from the public feeds of the whole network: the location is
+  never sent anywhere, stored nor logged.
+- **Network**: HTTPS requests to `www.meteoclimatic.net` only. Nothing listens.
+
 Out of scope: Gladys Assistant itself (see its
-[security policy](https://github.com/GladysAssistant/Gladys/security/policy)),
-and the third-party services and devices the integration talks to.
+[security policy](https://github.com/GladysAssistant/Gladys/security/policy))
+and the Meteoclimatic services.

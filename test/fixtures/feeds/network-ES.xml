@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss"
+>
+ <channel>
+  <title>Meteoclimatic - RSS</title>
+  <link>http://meteoclimatic.net/</link>
+  <description>Meteoclimatic - RSS</description>
+  <copyright>Creative Commons - Attribution-NonCommercial-NoDerivs 3.0 Unported</copyright>
+  <language>es</language>
+  <ttl>60</ttl>
+  <pubDate>Sat, 24 Oct 2026 19:32:38 +0000</pubDate>
+  <image>
+   <title>Meteoclimatic - RSS</title>
+   <url>http://meteoclimatic.net/img/rss.gif</url>
+   <link>http://meteoclimatic.net/</link>
+  </image>
+
+  <docs>http://meteoclimatic.net/index/wp/rss_es.html</docs>  <item>
+   <title>Ador (Valencia)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESPVA4600000046729B</link>
+   <pubDate>Sat, 24 Oct 2026 19:19:00 +0000</pubDate>
+   <guid>ea256b2e4cbef0faafb49b7c55acdaf2</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/ESPVA4600000046729B">Ador</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:19 UTC</li>
+<li>Temperatura: <b>18,1</b> &#186;C (
+M&#225;x.: <b style="color: red">21,7</b> / 
+M&#237;n.: <b style="color: blue">12,7</b> )</li>
+<li>Humedad: <b>77,0</b> % (
+M&#225;x.: <b style="color: red">88,0</b> / 
+M&#237;n.: <b style="color: blue">66,0</b> )</li>
+<li>Bar&#243;metro: <b>1027,5</b> hPa (
+M&#225;x.: <b style="color: red">1031,4</b> / 
+M&#237;n.: <b style="color: blue">1027,1</b> )</li>
+<li>Viento: <b>6,0</b> km/h (
+M&#225;x.: <b style="color: red">16,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>136</b> - SE</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESPVA4600000046729B:DATA>]]
+[[<ESPVA4600000046729B;(18,1;21,7;12,7;hazemoon);(77,0;88,0;66,0);(1027,5;1031,4;1027,1);(6,0;16,0;136);(0,0);Ador>]]
+[[<END:ESPVA4600000046729B:DATA>]]
+-->
+   </description>
+   <georss:point>38.92 -0.22</georss:point>
+   <geo:Point>
+    <geo:lat>38.92</geo:lat>
+    <geo:long>-0.22</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Agullent  (Valencia)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESPVA4600000046890A</link>
+   <pubDate>Sat, 24 Oct 2026 19:14:00 +0000</pubDate>
+   <guid>582c4e6b2a51386e223deed75b5a9436</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/ESPVA4600000046890A">Agullent </a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:14 UTC</li>
+<li>Temperatura: <b>16,7</b> &#186;C (
+M&#225;x.: <b style="color: red">21,2</b> / 
+M&#237;n.: <b style="color: blue">11,7</b> )</li>
+<li>Humedad: <b>71,0</b> % (
+M&#225;x.: <b style="color: red">82,0</b> / 
+M&#237;n.: <b style="color: blue">45,0</b> )</li>
+<li>Bar&#243;metro: <b>1026,1</b> hPa (
+M&#225;x.: <b style="color: red">1029,4</b> / 
+M&#237;n.: <b style="color: blue">1025,4</b> )</li>
+<li>Viento: <b>5,0</b> km/h (
+M&#225;x.: <b style="color: red">21,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>259</b> - W</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESPVA4600000046890A:DATA>]]
+[[<ESPVA4600000046890A;(16,7;21,2;11,7;hazemoon);(71,0;82,0;45,0);(1026,1;1029,4;1025,4);(5,0;21,0;259);(0,0);Agullent >]]
+[[<END:ESPVA4600000046890A:DATA>]]
+-->
+   </description>
+   <georss:point>38.83 -0.55</georss:point>
+   <geo:Point>
+    <geo:lat>38.83</geo:lat>
+    <geo:long>-0.55</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Alcal&#225; de Henares  (Madrid)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESMAD2800000028806B</link>
+   <pubDate>Sat, 24 Oct 2026 19:19:00 +0000</pubDate>
+   <guid>6b2678b9db4be71fa3e97fa179bc5c46</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/ESMAD2800000028806B">Alcal&#225; de Henares </a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:19 UTC</li>
+<li>Temperatura: <b>14,6</b> &#186;C (
+M&#225;x.: <b style="color: red">19,6</b> / 
+M&#237;n.: <b style="color: blue">5,5</b> )</li>
+<li>Humedad: <b>48,0</b> % (
+M&#225;x.: <b style="color: red">76,0</b> / 
+M&#237;n.: <b style="color: blue">33,0</b> )</li>
+<li>Bar&#243;metro: <b>1022,7</b> hPa (
+M&#225;x.: <b style="color: red">1026,4</b> / 
+M&#237;n.: <b style="color: blue">1021,9</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">20,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>157</b> - SSE</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESMAD2800000028806B:DATA>]]
+[[<ESMAD2800000028806B;(14,6;19,6;5,5;moon);(48,0;76,0;33,0);(1022,7;1026,4;1021,9);(0,0;20,0;157);(0,0);Alcal&#225; de Henares >]]
+[[<END:ESMAD2800000028806B:DATA>]]
+-->
+   </description>
+   <georss:point>40.49 -3.37</georss:point>
+   <geo:Point>
+    <geo:lat>40.49</geo:lat>
+    <geo:long>-3.37</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Alcorc&#243;n (Madrid)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESMAD2800000028923A</link>
+   <pubDate>Sat, 24 Oct 2026 19:16:11 +0000</pubDate>
+   <guid>fc8cc174967a6f2406cd2161756bd265</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_tpv.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESMAD2800000028923A">Alcorc&#243;n</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:16 UTC</li>
+<li>Temperatura: <b>15,2</b> &#186;C (
+M&#225;x.: <b style="color: red">18,1</b> / 
+M&#237;n.: <b style="color: blue">8,8</b> )</li>
+<li>Humedad: <b>47,0</b> % (
+M&#225;x.: <b style="color: red">60,0</b> / 
+M&#237;n.: <b style="color: blue">35,0</b> )</li>
+<li>Bar&#243;metro: <b>1028,4</b> hPa (
+M&#225;x.: <b style="color: red">1031,8</b> / 
+M&#237;n.: <b style="color: blue">1027,8</b> )</li>
+<li>Viento: <b>8,0</b> km/h (
+M&#225;x.: <b style="color: red">31,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>228</b> - SW</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESMAD2800000028923A:DATA>]]
+[[<ESMAD2800000028923A;(15,2;18,1;8,8;moon);(47,0;60,0;35,0);(1028,4;1031,8;1027,8);(8,0;31,0;228);(0,0);Alcorc&#243;n>]]
+[[<END:ESMAD2800000028923A:DATA>]]
+-->
+   </description>
+   <georss:point>40.34 -3.82</georss:point>
+   <geo:Point>
+    <geo:lat>40.34</geo:lat>
+    <geo:long>-3.82</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Arahal (Sevilla)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESAND4100000041600A</link>
+   <pubDate>Sat, 24 Oct 2026 19:15:00 +0000</pubDate>
+   <guid>b683d5a650b61ff44a5d7229d1f31688</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_qr.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESAND4100000041600A">Arahal</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:15 UTC</li>
+<li>Temperatura: <b>20,8</b> &#186;C (
+M&#225;x.: <b style="color: red">26,3</b> / 
+M&#237;n.: <b style="color: blue">10,8</b> )</li>
+<li>Humedad: <b>39,0</b> % (
+M&#225;x.: <b style="color: red">90,0</b> / 
+M&#237;n.: <b style="color: blue">30,0</b> )</li>
+<li>Bar&#243;metro: <b>1026,6</b> hPa (
+M&#225;x.: <b style="color: red">1028,9</b> / 
+M&#237;n.: <b style="color: blue">1025,8</b> )</li>
+<li>Direcci&#243;n del viento: <b>250</b> - WSW</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESAND4100000041600A:DATA>]]
+[[<ESAND4100000041600A;(20,8;26,3;10,8;moon);(39,0;90,0;30,0);(1026,6;1028,9;1025,8);(-99,0;-99,0;250);(0,0);Arahal>]]
+[[<END:ESAND4100000041600A:DATA>]]
+-->
+   </description>
+   <georss:point>37.27 -5.55</georss:point>
+   <geo:Point>
+    <geo:lat>37.27</geo:lat>
+    <geo:long>-5.55</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Arenys de Mar (Barcelona)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCAT0800000008350A</link>
+   <pubDate>Sat, 24 Oct 2026 19:09:00 +0000</pubDate>
+   <guid>1047041bb120e958783f7795b8b2530f</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_tpv.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESCAT0800000008350A">Arenys de Mar</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:09 UTC</li>
+<li>Temperatura: <b>14,8</b> &#186;C (
+M&#225;x.: <b style="color: red">20,1</b> / 
+M&#237;n.: <b style="color: blue">12,9</b> )</li>
+<li>Humedad: <b>82,0</b> % (
+M&#225;x.: <b style="color: red">89,0</b> / 
+M&#237;n.: <b style="color: blue">70,0</b> )</li>
+<li>Bar&#243;metro: <b>1020,1</b> hPa (
+M&#225;x.: <b style="color: red">1022,9</b> / 
+M&#237;n.: <b style="color: blue">1019,7</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">21,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>236</b> - WSW</li>
+<li>Precip.: <b>2,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCAT0800000008350A:DATA>]]
+[[<ESCAT0800000008350A;(14,8;20,1;12,9;hazemoon);(82,0;89,0;70,0);(1020,1;1022,9;1019,7);(0,0;21,0;236);(2,0);Arenys de Mar>]]
+[[<END:ESCAT0800000008350A:DATA>]]
+-->
+   </description>
+   <georss:point>41.59 2.56</georss:point>
+   <geo:Point>
+    <geo:lat>41.59</geo:lat>
+    <geo:long>2.56</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Arenys de Munt (Barcelona)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCAT0800000008358A</link>
+   <pubDate>Sat, 24 Oct 2026 19:20:00 +0000</pubDate>
+   <guid>1c8f7aa60528bb5a22a56c5267c7b605</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/ESCAT0800000008358A">Arenys de Munt</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:20 UTC</li>
+<li>Temperatura: <b>13,0</b> &#186;C (
+M&#225;x.: <b style="color: red">18,6</b> / 
+M&#237;n.: <b style="color: blue">12,3</b> )</li>
+<li>Humedad: <b>82,0</b> % (
+M&#225;x.: <b style="color: red">83,0</b> / 
+M&#237;n.: <b style="color: blue">69,0</b> )</li>
+<li>Bar&#243;metro: <b>1024,8</b> hPa (
+M&#225;x.: <b style="color: red">1027,8</b> / 
+M&#237;n.: <b style="color: blue">1024,1</b> )</li>
+<li>Viento: <b>2,0</b> km/h (
+M&#225;x.: <b style="color: red">21,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>338</b> - NNW</li>
+<li>Precip.: <b>3,6</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCAT0800000008358A:DATA>]]
+[[<ESCAT0800000008358A;(13,0;18,6;12,3;hazemoon);(82,0;83,0;69,0);(1024,8;1027,8;1024,1);(2,0;21,0;338);(3,6);Arenys de Munt>]]
+[[<END:ESCAT0800000008358A:DATA>]]
+-->
+   </description>
+   <georss:point>41.61 2.54</georss:point>
+   <geo:Point>
+    <geo:lat>41.61</geo:lat>
+    <geo:long>2.54</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Badalona - Bufal&#224; (Barcelona)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCAT0800000008915A</link>
+   <pubDate>Sat, 24 Oct 2026 19:25:03 +0000</pubDate>
+   <guid>f24bbf05f13a3bfb87935a39a38ef18a</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_obs.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESCAT0800000008915A">Badalona - Bufal&#224;</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:25 UTC</li>
+<li>Temperatura: <b>15,0</b> &#186;C (
+M&#225;x.: <b style="color: red">18,7</b> / 
+M&#237;n.: <b style="color: blue">12,8</b> )</li>
+<li>Humedad: <b>72,0</b> % (
+M&#225;x.: <b style="color: red">80,0</b> / 
+M&#237;n.: <b style="color: blue">62,0</b> )</li>
+<li>Bar&#243;metro: <b>1022,8</b> hPa (
+M&#225;x.: <b style="color: red">1025,9</b> / 
+M&#237;n.: <b style="color: blue">1022,3</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">8,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>0</b> - N</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCAT0800000008915A:DATA>]]
+[[<ESCAT0800000008915A;(15,0;18,7;12,8;hazemoon);(72,0;80,0;62,0);(1022,8;1025,9;1022,3);(0,0;8,0;0);(0,0);Badalona - Bufal&#224;>]]
+[[<END:ESCAT0800000008915A:DATA>]]
+-->
+   </description>
+   <georss:point>41.46 2.24</georss:point>
+   <geo:Point>
+    <geo:lat>41.46</geo:lat>
+    <geo:long>2.24</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Hontoria del Pinar (Burgos)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESCYL0900000009660A</link>
+   <pubDate>Sat, 24 Oct 2026 19:28:16 +0000</pubDate>
+   <guid>66b937071c295f134ba333fb394adeca</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/ESCYL0900000009660A">Hontoria del Pinar</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:28 UTC</li>
+<li>Temperatura: <b>6,8</b> &#186;C (
+M&#225;x.: <b style="color: red">15,0</b> / 
+M&#237;n.: <b style="color: blue">-2,7</b> )</li>
+<li>Bar&#243;metro: <b>1031,8</b> hPa (
+M&#225;x.: <b style="color: red">1037,0</b> / 
+M&#237;n.: <b style="color: blue">1029,5</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">24,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>19</b> - NNE</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESCYL0900000009660A:DATA>]]
+[[<ESCYL0900000009660A;(6,8;15,0;-2,7;moon);(-99,0;-99,0;-99,0);(1031,8;1037,0;1029,5);(0,0;24,0;19);(0,0);Hontoria del Pinar>]]
+[[<END:ESCYL0900000009660A:DATA>]]
+-->
+   </description>
+   <georss:point>41.85 -3.16</georss:point>
+   <geo:Point>
+    <geo:lat>41.85</geo:lat>
+    <geo:long>-3.16</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Rivas - Pueblo (Madrid)</title>
+   <link>http://www.meteoclimatic.net/perfil/ESMAD2800000028529A</link>
+   <pubDate>Sat, 24 Oct 2026 19:19:08 +0000</pubDate>
+   <guid>2f3e0ce3b77f69cde74ec20dede03eb4</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><img src="http://meteoclimatic.net/img/sem_qv.png" style="width: 12px; height: 12px; border: 0px;" alt="***" /> <a href="http://www.meteoclimatic.net/perfil/ESMAD2800000028529A">Rivas - Pueblo</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:19 UTC</li>
+<li>Temperatura: <b>13,6</b> &#186;C (
+M&#225;x.: <b style="color: red">19,1</b> / 
+M&#237;n.: <b style="color: blue">4,5</b> )</li>
+<li>Humedad: <b>56,0</b> % (
+M&#225;x.: <b style="color: red">82,0</b> / 
+M&#237;n.: <b style="color: blue">37,0</b> )</li>
+<li>Bar&#243;metro: <b>1025,6</b> hPa (
+M&#225;x.: <b style="color: red">1029,5</b> / 
+M&#237;n.: <b style="color: blue">1024,9</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">19,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>0</b> - N</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:ESMAD2800000028529A:DATA>]]
+[[<ESMAD2800000028529A;(13,6;19,1;4,5;moon);(56,0;82,0;37,0);(1025,6;1029,5;1024,9);(0,0;19,0;0);(-99,0);Rivas - Pueblo>]]
+[[<END:ESMAD2800000028529A:DATA>]]
+-->
+   </description>
+   <georss:point>40.33 -3.52</georss:point>
+   <geo:Point>
+    <geo:lat>40.33</geo:lat>
+    <geo:long>-3.52</geo:long>
+   </geo:Point>
+  </item>
+</channel>
+</rss>

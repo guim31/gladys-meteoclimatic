@@ -1,61 +1,170 @@
-# Demo Devices Template
+# Meteoclimatic
 
-This is the user documentation of the integration. Gladys re-hosts this file
-and shows a permanent **Documentation** link to it in the Configuration screen
-(in the user's language, with English as the fallback) — it is when
-configuring that the user needs it most. Keep the short onboarding hints in
-the `section` blocks of the manifest `config_schema`; put the long
-step-by-step (screenshots, troubleshooting…) here.
+The readings of the amateur weather stations of
+[Meteoclimatic](https://www.meteoclimatic.net/), a network of more than 1,500
+stations in Spain, Portugal and Andorra: temperature, humidity, pressure, wind
+and rain of the day, refreshed every 10 to 15 minutes.
 
-## What you get
+The data belongs to Meteoclimatic and its station owners, under the
+CC BY-NC-ND 3.0 licence: the integration shows it unchanged, and the widget
+credits the source. This integration is not affiliated with Meteoclimatic. For
+official forecasts and observations in Spain, see the AEMET integration.
 
-Six demo devices show up after installation: a weather station (real data
-from Open-Meteo), a switch, a dimmable light, a smart plug with power
-metering, a motion sensor and a camera.
+## What it does
+
+- Reads the **stations you choose** by their code, with no account and no key.
+- Creates **one device per station**: temperature, high and low of the day,
+  humidity, pressure, wind, strongest wind of the day, wind direction, rain of
+  the day, and the age of the reading. A station without rain gauge or
+  anemometer simply has no such feature.
+- Finds the **stations around your house**, with their distance.
+- Adds a **Meteoclimatic station** dashboard widget, five scene triggers (rain
+  starts, rain stops, strong wind, station silent, station back) and a scene
+  action **Station readings**.
+
+Read only: the integration never changes anything on a station.
+
+## Requirements
+
+- Gladys Assistant **5.2.0** or later.
+- Internet access (the public feeds of meteoclimatic.net).
+- For the nearby search: the location of your house, set in **Settings →
+  Houses**. The integration asks for access to the house coordinates on the
+  install screen; it only uses them for this search.
 
 ## Configuration
 
+### Choose the stations
+
 1. Open the **Configuration** tab of the integration.
-2. Set the **latitude** and **longitude** the demo weather station should
-   observe (they default to Paris), and pick your temperature unit.
-   The **refresh interval** sets how often the weather station and the
-   plug's power are read: every 5 minutes by default, every minute at most.
-3. Save: the devices appear in the **Discovery** tab, ready to be added.
+2. Click **Find stations near a house**: pick the house (empty: the first
+   house with a location) and a radius (empty: 10 km). The result lists the
+   stations online, nearest first, with their code, name, province and
+   distance.
+3. Copy the codes you want into **Stations**, separated by commas (10 at
+   most). The code also ends the address of a station page on the website:
+   `https://www.meteoclimatic.net/perfil/ESCAT0800000008350A`; the whole
+   address is accepted too.
+4. Save, then open the **Discovery** tab and add the stations.
 
-The **Prefer the local connection** toggle drives the demo plug: it reports
-the channel it actually uses as a badge (local or cloud), with an orange dot
-when it runs degraded (local refused, cloud fallback).
+A zone code (`ESCAT08`, a province) is not a station: **Check the stations**
+says so.
 
-## Actions
+### Other settings
 
-- **Test the weather provider** — performs a live request to Open-Meteo and
-  shows the current temperature and humidity under the button.
-- **Identify a device** — pick one of your devices in the list and it will
-  signal itself (the demo light "blinks" in the logs).
+- **Reading interval**: every 10, 15 (default), 30 or 60 minutes. The
+  stations upload about every 10 minutes, and Meteoclimatic is a volunteer
+  network: the integration never reads faster, one station at a time.
+- **Language**: language of the feature names, set when a device is added
+  (rename them in Gladys if you change your mind afterwards), and of the
+  scene texts.
+
+**Check the stations** reads each station now and tells how old its last
+reading is.
+
+## Devices
+
+### Station
+
+One device per station, named after the station ("Meteoclimatic Arenys de
+Mar"):
+
+| Feature                | Unit | Notes                                       |
+| ---------------------- | ---- | ------------------------------------------- |
+| Temperature            | °C   |                                             |
+| Today's high / low     | °C   | since local midnight, as the station counts |
+| Humidity               | %    |                                             |
+| Pressure               | hPa  | as the station publishes it                 |
+| Wind                   | km/h | the current wind of the station             |
+| Today's strongest wind | km/h | the highest wind of the day                 |
+| Wind direction         | °    | 0 = north, 90 = east                        |
+| Rain today             | mm   | since local midnight                        |
+| Reading age            | min  | minutes since the last reading              |
+
+The features are those the station sends: one without rain gauge has no
+"Rain today". They are learnt from its data and kept.
+
+### Reading age
+
+Meteoclimatic only lists a station that uploaded within about an hour. Past
+60 minutes without a new reading, the values are no longer sent to Gladys
+(they would look recent): only the **reading age** keeps growing, and the
+widget shows the station as offline.
+
+## Widget
+
+**Meteoclimatic station**: the temperature, humidity, wind and rain of the
+day as live tiles, the high and low of the day, the strongest wind (orange
+from 60 km/h), and the age of the reading, with the credit of the source.
+Setting: the station (empty: the first station added).
 
 ## Scenes
 
-The integration adds its own cards to the scene editor (Gladys 5.1 or
-later), under the **Integrations** category:
+### Triggers
 
-- **Motion detected** (trigger) — starts the scene when a demo motion sensor
-  sees something move. Optionally pick the sensor and what moved (person,
-  animal); left empty, any detection matches. The following actions can
-  read what moved with `{{triggerEvent.data.target}}`.
-- **Identify a device** (action) — makes the chosen device signal itself.
-  It returns whether the device could signal itself, so the following
-  actions can depend on it.
+Every trigger has a **Station** filter, and gives the station name as a
+variable.
 
-## Dashboard
+- **Meteoclimatic: it starts raining**: the rain of the day grows again
+  after 30 minutes without growing. Once per rain episode. Variable: rain of
+  the day (mm).
+- **Meteoclimatic: the rain stops**: the rain of the day stopped growing for
+  30 minutes, 1, 2 or 3 hours, after rain. Once per dry spell and per
+  duration. Variable: rain of the day (mm).
+- **Meteoclimatic: strong wind**: the strongest wind of the day passes 30,
+  40… 120 km/h. Once per day and per threshold. Variable: strongest wind
+  (km/h).
+- **Meteoclimatic: station silent**: no new reading for 1, 2, 4 or 12 hours.
+  Variable: minutes without reading.
+- **Meteoclimatic: station back**: a new reading after a silence of an hour
+  at least. Variable: minutes without reading.
 
-Add the **Demo status** widget to a dashboard: it shows the live
-temperature of the weather station and the power of the office plug, the
-connection the plug currently uses (orange when degraded) and the observed
-location. Its **Identify the light** button makes the demo light signal
-itself.
+Meteoclimatic gives the rain and the strongest wind **of the day**, not the
+instant values: the triggers follow their increases, at the pace of the
+readings (10 minutes at best). After a restart of the integration, the first
+reading is a reference: rain already fallen or a strong wind already
+measured do not fire anything.
+
+### Action: Station readings
+
+Gives the last reading of a station (empty: the first station added):
+temperature, high and low of the day, humidity, pressure, wind, strongest
+wind, rain of the day, age, online or not, and a ready-made sentence:
+"Meteoclimatic Arenys de Mar · 14.8 °C · 82 % · Wind 12 km/h SW · Rain
+today 2 mm · 3 min ago". A station offline gives its age only.
+
+## Scene examples
+
+- **Close the awning when the wind rises**: trigger "Meteoclimatic: strong
+  wind", above 50 km/h → close the awning, send a message.
+- **No watering after rain**: trigger "Meteoclimatic: it starts raining" →
+  turn the watering scene off for the day; trigger "the rain stops" after 3
+  hours → turn it back on.
+- **Morning weather message**: every day at 7:00 → action "Meteoclimatic:
+  station readings" → send `{{summary}}` to your phone.
 
 ## Troubleshooting
 
-The integration logs everything it does: check the integration logs from the
-Gladys UI (or `docker logs` on the host) with `LOG_LEVEL=debug` for the full
-detail.
+- **Nothing in the Discovery tab**: the station has not uploaded for over an
+  hour, or the code is wrong. **Check the stations** tells which, and the
+  station page on meteoclimatic.net shows its last reading.
+- **"This is a zone, not a station"**: use **Find stations near a house** or
+  the code at the end of a station page.
+- **The search finds nothing**: Meteoclimatic covers Spain, Portugal and
+  Andorra; try a wider radius.
+- **"Meteoclimatic does not answer"**: the website is down or unreachable
+  from Gladys; the readings resume on their own.
+- **Detailed logs**: set `LOG_LEVEL=debug` on the integration container.
+
+## Limits
+
+- Amateur stations, maintained by volunteers: their siting and calibration
+  vary, a value can be off, and a station can stop for days.
+- The rain and the strongest wind are those of the day (reset at local
+  midnight by the station), not the instant rain rate nor the current gust.
+- The pressure is the one the station publishes: usually sea-level, sometimes
+  the station's own (a mountain station then reads about 850 hPa).
+- Positions are rounded to two decimals (about a kilometre): distances are
+  approximate.
+- The feeds carry no humidity or pressure history, no UV, no solar radiation.
+- Data under CC BY-NC-ND 3.0: personal, non-commercial use, with credit.
