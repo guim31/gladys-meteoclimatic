@@ -72,6 +72,8 @@ test('a device added: every state now, and the widget refreshed', async () => {
   assert.equal(state(w, BARCELONA, 'rain_today'), 2);
   assert.equal(state(w, BARCELONA, 'wind_direction'), 236);
   assert.equal(state(w, BARCELONA, 'age'), 5);
+  // Each feature once, not twice (read + forced republication).
+  assert.equal(w.gladys.fake.states.length, 10);
   assert.ok(w.gladys.fake.widgetRefreshes.length > 0);
 });
 

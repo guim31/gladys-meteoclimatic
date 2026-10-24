@@ -143,8 +143,11 @@ export function registerHandlers(gladys, { store = new Store(), fetch, timers = 
     if (!record) {
       return;
     }
+    // Forgotten first, then published once: by the read, or here if the
+    // station was read less than a minute ago.
+    gladys.forgetPublishedStates(device.external_id);
     await poller.refreshNow([record.code], { maxAgeMs: 60_000 });
-    await hub.publishStates(record, { force: true });
+    await hub.publishStates(record);
     gladys.requestWidgetRefresh(WIDGET_KEY);
   }
   gladys.onDeviceCreated(onDeviceAdded);
