@@ -7,7 +7,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createAll, createWorld, discovered } from './helpers/world.js';
-import { BARCELONA, MADRID, NO_RAIN_GAUGE, VALENCIA, feed, fresh } from './helpers/network.js';
+import {
+  BARCELONA,
+  MADRID,
+  NO_RAIN_GAUGE,
+  VALENCIA,
+  feed,
+  fresh,
+  withValues,
+} from './helpers/network.js';
 import { MemoryStore } from '../src/store.js';
 import { TEXT } from '../src/i18n.js';
 
@@ -138,4 +146,40 @@ test('the status of the Configuration screen', async () => {
   down.network.feeds[BARCELONA] = (now) => fresh(feed('station-barcelona'), now);
   await down.run(15);
   assert.equal(down.gladys.fake.connectionStatus.connected, true);
+});
+
+test('a failure to publish the states: logged, and the scene events still go out', async (t) => {
+  let rain = 0;
+  const w = await createWorld({
+    config: { stations: BARCELONA, refresh_minutes: '10' },
+    feeds: {
+      [BARCELONA]: (now) => fresh(withValues(feed('station-barcelona'), { rain }), now, 60_000),
+    },
+  });
+  await createAll(w);
+  t.mock.method(w.gladys, 'publishChangedStates', async () => {
+    throw new Error('HTTP 429');
+  });
+  rain = 1;
+  await w.run(10);
+  assert.deepEqual(
+    w.gladys.fake.sceneEvents.map((e) => e.key),
+    ['rain_started'],
+  );
+  assert.ok(w.hub.issues.isFailing('publish'));
+});
+
+test('the widget only shows the features of the device as created in Gladys', async () => {
+  const w = await createWorld({ stations: [BARCELONA], config: { stations: BARCELONA } });
+  const device = discovered(w, BARCELONA);
+  await w.gladys.fake.deviceCreated({
+    ...device,
+    features: device.features.filter((f) => !f.external_id.endsWith(':rain_today')),
+  });
+  const { data } = await w.gladys.fake.widgetGet('station', { settings: {}, language: 'en' });
+  const tiles = data.content.components.filter((c) => c.type === 'value');
+  assert.deepEqual(
+    tiles.map((c) => c.device_feature.split(':').pop()),
+    ['temperature', 'humidity', 'wind_speed'],
+  );
 });

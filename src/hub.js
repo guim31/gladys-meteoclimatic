@@ -128,7 +128,10 @@ export class Hub {
   trackerOf(record) {
     let tracker = this.trackers.get(record.code);
     if (!tracker) {
-      tracker = createTriggerTracker({ lastReadingAt: record.measuredAt ?? null });
+      tracker = createTriggerTracker({
+        lastReadingAt: record.measuredAt ?? null,
+        startedAt: this.now(),
+      });
       this.trackers.set(record.code, tracker);
     }
     return tracker;
@@ -271,7 +274,10 @@ export class Hub {
    */
   async tick() {
     for (const record of this.configuredRecords()) {
-      const { dry, silent, silentMinutes } = this.trackerOf(record).onTick(this.now());
+      // While Meteoclimatic itself is down, no station is blamed for the silence.
+      const { dry, silent, silentMinutes } = this.trackerOf(record).onTick(this.now(), {
+        serviceDown: this.issues.isFailing('api'),
+      });
       if (!this.isCreated(record)) {
         continue;
       }
@@ -339,11 +345,18 @@ export class Hub {
     if (minutes !== null) {
       states.push({ device_feature_external_id: ids.feature(AGE_KEY), state: minutes });
     }
-    if (states.length > 0) {
-      await this.gladys.publishChangedStates(states, { heartbeat: STATE_HEARTBEAT_MS });
-    }
-    for (const event of events) {
-      await this.fireScene(record, event.key, event.data);
+    try {
+      if (states.length > 0) {
+        await this.gladys.publishChangedStates(states, { heartbeat: STATE_HEARTBEAT_MS });
+        this.issues.ok('publish', 'Gladys accepts the states again');
+      }
+    } catch (err) {
+      this.issues.fail('publish', `Publishing the states failed: ${err.message}`);
+    } finally {
+      // The events of the reading go out even when its states could not.
+      for (const event of events) {
+        await this.fireScene(record, event.key, event.data);
+      }
     }
   }
 

@@ -33,7 +33,9 @@
 
 const BASE_URL = 'https://www.meteoclimatic.net/feed/rss/';
 const USER_AGENT = 'gladys-meteoclimatic (+https://github.com/guim31/gladys-meteoclimatic)';
-const TIMEOUT_MS = 30_000;
+// Per request: the search reads three feeds and the check up to ten
+// stations, within the timeouts of their actions (60 s, 120 s).
+const TIMEOUT_MS = 10_000;
 
 /** The value of a sensor the station does not have. */
 const MISSING = -99;

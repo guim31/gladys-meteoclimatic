@@ -276,6 +276,10 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
   défaut, 10 stations au plus, lues l'une après l'autre, `User-Agent` qui nomme le dépôt.
 - **Valeur périmée** au-delà de 60 min : plus publiée, seul l'« âge du relevé » avance ; au retour,
   tout est republié (`forgetPublishedStates`).
-- **Déclencheurs** sur les hausses des cumuls du jour : une baisse veut dire minuit passé (repart de
-  0). Le premier relevé après démarrage sert de référence (aucun déclenchement), et « retour de la
-  station » n'est annoncé que pour un silence vu pendant que le conteneur tournait.
+- **Déclencheurs** sur les hausses des cumuls du jour. Le jour se lit sur la date locale de `pubDate`
+  (fuseau `TZ` injecté par Gladys, celui de la maison) : un relevé d'un nouveau jour se compare à 0,
+  une baisse dans la journée (redémarrage de la station) ne déclenche rien. « La pluie s'arrête »
+  exige un relevé qui montre la durée sans hausse (une station muette après la pluie ne prouve rien).
+  Le premier relevé après démarrage sert de référence ; « retour de la station » ne vaut que pour un
+  silence commencé pendant que le conteneur tournait ; ni silence ni retour pendant une panne de
+  Meteoclimatic lui-même (relecture du 24/10/2026).

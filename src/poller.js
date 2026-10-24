@@ -89,7 +89,7 @@ export function createPoller({
       await run;
       return true;
     } catch (err) {
-      // Logged once by the hub's issue log; the next read retries.
+      // A feed error is logged once by the hub's issue log; the next read retries.
       logger.debug(`${code}: ${err.message}`);
       return true;
     } finally {
@@ -129,11 +129,15 @@ export function createPoller({
   }
 
   return {
-    /** (Re)start: read every wanted station now, then on the timer. */
+    /**
+     * (Re)start: read the wanted stations not read lately, then on the
+     * timer. Not forced: a flapping link to Gladys must not turn into
+     * bursts of requests to a volunteer network.
+     */
     async restart() {
       stopped = false;
       schedule();
-      await cycle({ force: true });
+      await cycle();
     },
 
     /** One timer cycle (tests). */

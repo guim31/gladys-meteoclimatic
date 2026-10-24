@@ -8,12 +8,15 @@
 // Meteoclimatic gives the rain of the day and the strongest wind of the day,
 // not the instant values: the triggers read their increases.
 //
+// The totals restart at local midnight: a reading of a new local day
+// compares with 0, a drop within the day (a station restart) fires nothing.
+//
 // `rain_started` — the rain of the day grows after 30 minutes without
-//   growing (or restarts from a new day): once per rain episode.
-// `rain_stopped` — the rain of the day stopped growing N minutes ago, after
-//   rain: once per dry spell and per threshold.
+//   growing: once per rain episode.
+// `rain_stopped` — a reading N minutes after the last growth still shows
+//   none, after rain: once per dry spell and per threshold.
 // `gust_above` — the strongest wind of the day passes N km/h: once per day
-//   and per threshold (the day's maximum only grows).
+//   and per threshold.
 // `station_silent` — no new reading for N minutes: once per silence and per
 //   threshold.
 // `station_back` — a new reading after a silence of an hour at least, seen
@@ -44,12 +47,21 @@ export const SILENT_MINUTES = [60, 120, 240, 720];
 
 const MINUTE = 60 * 1000;
 
+/** The local day of a time, in the container's time zone (Gladys injects TZ). */
+export function localDay(ms) {
+  const date = new Date(ms);
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
 /**
  * @param {object} options
  * @param {number | null} [options.lastReadingAt] the last reading known (from /data)
+ * @param {number} options.startedAt when the tracker starts (the container's clock)
+ * @param {(ms: number) => string} [options.dayOf] the local day of a time
  */
-export function createTriggerTracker({ lastReadingAt = null } = {}) {
+export function createTriggerTracker({ lastReadingAt = null, startedAt, dayOf = localDay }) {
   let baseline = false;
+  let day = null;
   let lastRain = null;
   let lastRainAt = null;
   let dryFired = new Set();
@@ -58,6 +70,16 @@ export function createTriggerTracker({ lastReadingAt = null } = {}) {
   // A silence already long at start-up is not announced again.
   let silentFired = null;
   let silenceSeen = false;
+
+  /**
+   * The values crossed upwards by a daily total since the last reading: the
+   * station restarts its totals at local midnight, so a new day starts
+   * from 0; a drop within the day (a station restart) only moves the base.
+   */
+  function rise(previous, value, newDay) {
+    const before = newDay ? 0 : previous;
+    return before === null ? null : { before, after: value };
+  }
 
   return {
     /**
@@ -76,6 +98,9 @@ export function createTriggerTracker({ lastReadingAt = null } = {}) {
       silentFired = new Set();
       const rain = values.rain_today ?? null;
       const windMax = values.wind_max ?? null;
+      const readingDay = dayOf(measuredAt);
+      const newDay = day !== null && readingDay !== day;
+      day = readingDay;
       if (!baseline) {
         baseline = true;
         lastRain = rain;
@@ -87,9 +112,8 @@ export function createTriggerTracker({ lastReadingAt = null } = {}) {
 
       let rainStarted = false;
       if (rain !== null) {
-        // Growing, or a new day that already has rain (the total restarted).
-        const fell = lastRain === null ? false : rain > lastRain || (rain < lastRain && rain > 0);
-        if (fell) {
+        const change = rise(lastRain, rain, newDay);
+        if (change && change.after > change.before) {
           rainStarted = lastRainAt === null || measuredAt - lastRainAt >= QUIET_PERIOD_MS;
           lastRainAt = measuredAt;
           dryFired = new Set();
@@ -99,10 +123,9 @@ export function createTriggerTracker({ lastReadingAt = null } = {}) {
 
       const gusts = [];
       if (windMax !== null) {
-        // The maximum of the day only grows: lower means a new day, from 0.
-        const before = lastWindMax === null ? windMax : windMax < lastWindMax ? 0 : lastWindMax;
+        const change = rise(lastWindMax, windMax, newDay);
         for (const threshold of GUST_THRESHOLDS_KMH) {
-          if (before <= threshold && windMax > threshold) {
+          if (change && change.before <= threshold && change.after > threshold) {
             gusts.push(threshold);
           }
         }
@@ -114,23 +137,27 @@ export function createTriggerTracker({ lastReadingAt = null } = {}) {
     /**
      * The clock ticked: dry spells and silences.
      * @param {number} now
+     * @param {{ serviceDown?: boolean }} [options] serviceDown: Meteoclimatic
+     *   itself does not answer, so no silence can be blamed on the station
      * @returns {{ dry: number[], silent: number[], silentMinutes: number | null }}
      */
-    onTick(now) {
+    onTick(now, { serviceDown = false } = {}) {
+      // A dry spell is confirmed by a reading, not by the clock alone: a
+      // station that went silent after rain says nothing about the rain.
       const dry = [];
-      if (lastRainAt !== null) {
+      if (lastRainAt !== null && readingAt !== null) {
         for (const minutes of DRY_MINUTES) {
-          if (!dryFired.has(minutes) && now - lastRainAt >= minutes * MINUTE) {
+          if (!dryFired.has(minutes) && readingAt - lastRainAt >= minutes * MINUTE) {
             dryFired.add(minutes);
             dry.push(minutes);
           }
         }
       }
-      if (readingAt === null) {
+      if (readingAt === null || serviceDown) {
         return { dry, silent: [], silentMinutes: null };
       }
       const silentMinutes = Math.floor((now - readingAt) / MINUTE);
-      if (now - readingAt >= BACK_AFTER_MS) {
+      if (now - Math.max(readingAt, startedAt) >= BACK_AFTER_MS) {
         silenceSeen = true;
       }
       const reached = SILENT_MINUTES.filter((minutes) => now - readingAt >= minutes * MINUTE);

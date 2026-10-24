@@ -53,7 +53,12 @@ export function buildStationContent({ hub, gladys, settings = {}, language = 'en
     }
   }
   const ids = idsOf(gladys, record.code);
-  const tiles = TILES.filter((key) => record.features.includes(key)).map((key) => ({
+  // Only the features of the device as created in Gladys: a measure learnt
+  // since then waits for "Update" in the Discovery tab.
+  const created = new Set(
+    (hub.createdDevice(record)?.features ?? []).map((feature) => feature.external_id),
+  );
+  const tiles = TILES.filter((key) => created.has(ids.feature(key))).map((key) => ({
     type: 'value',
     label: NAMES[lang][key],
     device_feature: ids.feature(key),
