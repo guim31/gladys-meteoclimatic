@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss"
+>
+ <channel>
+  <title>Meteoclimatic - RSS</title>
+  <link>http://meteoclimatic.net/</link>
+  <description>Meteoclimatic - RSS</description>
+  <copyright>Creative Commons - Attribution-NonCommercial-NoDerivs 3.0 Unported</copyright>
+  <language>es</language>
+  <ttl>60</ttl>
+  <pubDate>Sat, 24 Oct 2026 19:35:08 +0000</pubDate>
+  <image>
+   <title>Meteoclimatic - RSS</title>
+   <url>http://meteoclimatic.net/img/rss.gif</url>
+   <link>http://meteoclimatic.net/</link>
+  </image>
+
+  <docs>http://meteoclimatic.net/index/wp/rss_es.html</docs>  <item>
+   <title>Calheta (Madeira)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTMAD8000000109370A</link>
+   <pubDate>Sat, 24 Oct 2026 19:00:00 +0000</pubDate>
+   <guid>7f147a96d16ac17b20844be4ad8b93e1</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTMAD8000000109370A">Calheta</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:00 UTC</li>
+<li>Temperatura: <b>20,1</b> &#186;C (
+M&#225;x.: <b style="color: red">25,7</b> / 
+M&#237;n.: <b style="color: blue">16,7</b> )</li>
+<li>Humedad: <b>77,0</b> % (
+M&#225;x.: <b style="color: red">77,0</b> / 
+M&#237;n.: <b style="color: blue">51,0</b> )</li>
+<li>Bar&#243;metro: <b>1027,1</b> hPa (
+M&#225;x.: <b style="color: red">1029,1</b> / 
+M&#237;n.: <b style="color: blue">1026,1</b> )</li>
+<li>Viento: <b>0,0</b> km/h (
+M&#225;x.: <b style="color: red">0,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>91</b> - E</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTMAD8000000109370A:DATA>]]
+[[<PTMAD8000000109370A;(20,1;25,7;16,7;moon);(77,0;77,0;51,0);(1027,1;1029,1;1026,1);(0,0;0,0;91);(0,0);Calheta>]]
+[[<END:PTMAD8000000109370A:DATA>]]
+-->
+   </description>
+   <georss:point>32.73 -17.19</georss:point>
+   <geo:Point>
+    <geo:lat>32.73</geo:lat>
+    <geo:long>-17.19</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Cela (Leiria)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTCEN1100000002460B</link>
+   <pubDate>Sat, 24 Oct 2026 19:28:28 +0000</pubDate>
+   <guid>a4ca7cfb74459f413e8546e9df1bdb20</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTCEN1100000002460B">Cela</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:28 UTC</li>
+<li>Temperatura: <b>12,3</b> &#186;C (
+M&#225;x.: <b style="color: red">19,7</b> / 
+M&#237;n.: <b style="color: blue">7,6</b> )</li>
+<li>Humedad: <b>85,0</b> % (
+M&#225;x.: <b style="color: red">92,0</b> / 
+M&#237;n.: <b style="color: blue">50,0</b> )</li>
+<li>Bar&#243;metro: <b>1028,4</b> hPa (
+M&#225;x.: <b style="color: red">1030,0</b> / 
+M&#237;n.: <b style="color: blue">1027,2</b> )</li>
+<li>Viento: <b>5,0</b> km/h (
+M&#225;x.: <b style="color: red">28,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>247</b> - WSW</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTCEN1100000002460B:DATA>]]
+[[<PTCEN1100000002460B;(12,3;19,7;7,6;hazemoon);(85,0;92,0;50,0);(1028,4;1030,0;1027,2);(5,0;28,0;247);(0,0);Cela>]]
+[[<END:PTCEN1100000002460B:DATA>]]
+-->
+   </description>
+   <georss:point>39.54 -9.04</georss:point>
+   <geo:Point>
+    <geo:lat>39.54</geo:lat>
+    <geo:long>-9.04</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Guimar&#227;es (Braga)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTNOR0400000004810A</link>
+   <pubDate>Sat, 24 Oct 2026 19:18:00 +0000</pubDate>
+   <guid>7c0cf2c94d4d32401e6285b47d562a67</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTNOR0400000004810A">Guimar&#227;es</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:18 UTC</li>
+<li>Temperatura: <b>12,3</b> &#186;C (
+M&#225;x.: <b style="color: red">16,8</b> / 
+M&#237;n.: <b style="color: blue">8,7</b> )</li>
+<li>Humedad: <b>76,0</b> % (
+M&#225;x.: <b style="color: red">82,0</b> / 
+M&#237;n.: <b style="color: blue">53,0</b> )</li>
+<li>Bar&#243;metro: <b>1028,6</b> hPa (
+M&#225;x.: <b style="color: red">1031,3</b> / 
+M&#237;n.: <b style="color: blue">1027,4</b> )</li>
+<li>Viento: <b>7,0</b> km/h (
+M&#225;x.: <b style="color: red">23,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>225</b> - SW</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTNOR0400000004810A:DATA>]]
+[[<PTNOR0400000004810A;(12,3;16,8;8,7;hazemoon);(76,0;82,0;53,0);(1028,6;1031,3;1027,4);(7,0;23,0;225);(0,0);Guimar&#227;es>]]
+[[<END:PTNOR0400000004810A:DATA>]]
+-->
+   </description>
+   <georss:point>41.45 -8.26</georss:point>
+   <geo:Point>
+    <geo:lat>41.45</geo:lat>
+    <geo:long>-8.26</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Lourinh&#227; (Lisboa)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTSUR1200000002530A</link>
+   <pubDate>Sat, 24 Oct 2026 19:08:00 +0000</pubDate>
+   <guid>d1367273c0b523a39b723e91723111c9</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTSUR1200000002530A">Lourinh&#227;</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:08 UTC</li>
+<li>Temperatura: <b>14,4</b> &#186;C (
+M&#225;x.: <b style="color: red">20,2</b> / 
+M&#237;n.: <b style="color: blue">10,5</b> )</li>
+<li>Humedad: <b>78,0</b> % (
+M&#225;x.: <b style="color: red">89,0</b> / 
+M&#237;n.: <b style="color: blue">55,0</b> )</li>
+<li>Bar&#243;metro: <b>1028,8</b> hPa (
+M&#225;x.: <b style="color: red">1030,7</b> / 
+M&#237;n.: <b style="color: blue">1028,1</b> )</li>
+<li>Viento: <b>5,0</b> km/h (
+M&#225;x.: <b style="color: red">31,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>51</b> - NE</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTSUR1200000002530A:DATA>]]
+[[<PTSUR1200000002530A;(14,4;20,2;10,5;hazemoon);(78,0;89,0;55,0);(1028,8;1030,7;1028,1);(5,0;31,0;51);(0,0);Lourinh&#227;>]]
+[[<END:PTSUR1200000002530A:DATA>]]
+-->
+   </description>
+   <georss:point>39.23 -9.31</georss:point>
+   <geo:Point>
+    <geo:lat>39.23</geo:lat>
+    <geo:long>-9.31</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Quinta do Conde PT (Set&#250;bal)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTSUR1700000002975A</link>
+   <pubDate>Sat, 24 Oct 2026 19:28:31 +0000</pubDate>
+   <guid>3ed87dc4c8a888c6ef02f51245332a8e</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTSUR1700000002975A">Quinta do Conde PT</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:28 UTC</li>
+<li>Temperatura: <b>16,2</b> &#186;C (
+M&#225;x.: <b style="color: red">22,7</b> / 
+M&#237;n.: <b style="color: blue">4,2</b> )</li>
+<li>Humedad: <b>67,0</b> % (
+M&#225;x.: <b style="color: red">96,0</b> / 
+M&#237;n.: <b style="color: blue">35,0</b> )</li>
+<li>Bar&#243;metro: <b>1028,1</b> hPa (
+M&#225;x.: <b style="color: red">1030,5</b> / 
+M&#237;n.: <b style="color: blue">1026,5</b> )</li>
+<li>Viento: <b>9,0</b> km/h (
+M&#225;x.: <b style="color: red">29,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>8</b> - N</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTSUR1700000002975A:DATA>]]
+[[<PTSUR1700000002975A;(16,2;22,7;4,2;moon);(67,0;96,0;35,0);(1028,1;1030,5;1026,5);(9,0;29,0;8);(0,0);Quinta do Conde PT>]]
+[[<END:PTSUR1700000002975A:DATA>]]
+-->
+   </description>
+   <georss:point>38.55 -9.04</georss:point>
+   <geo:Point>
+    <geo:lat>38.55</geo:lat>
+    <geo:long>-9.04</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Ranhados  (Guarda)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTCEN1000000006430A</link>
+   <pubDate>Sat, 24 Oct 2026 19:28:11 +0000</pubDate>
+   <guid>ad28aac7546ffaed5ce0a70cec28779d</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTCEN1000000006430A">Ranhados </a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:28 UTC</li>
+<li>Temperatura: <b>11,7</b> &#186;C (
+M&#225;x.: <b style="color: red">19,9</b> / 
+M&#237;n.: <b style="color: blue">3,8</b> )</li>
+<li>Humedad: <b>67,0</b> % (
+M&#225;x.: <b style="color: red">88,0</b> / 
+M&#237;n.: <b style="color: blue">32,0</b> )</li>
+<li>Bar&#243;metro: <b>1027,7</b> hPa (
+M&#225;x.: <b style="color: red">1031,0</b> / 
+M&#237;n.: <b style="color: blue">1026,5</b> )</li>
+<li>Viento: <b>1,0</b> km/h (
+M&#225;x.: <b style="color: red">17,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>248</b> - WSW</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTCEN1000000006430A:DATA>]]
+[[<PTCEN1000000006430A;(11,7;19,9;3,8;moon);(67,0;88,0;32,0);(1027,7;1031,0;1026,5);(1,0;17,0;248);(0,0);Ranhados >]]
+[[<END:PTCEN1000000006430A:DATA>]]
+-->
+   </description>
+   <georss:point>41 -7.33</georss:point>
+   <geo:Point>
+    <geo:lat>41</geo:lat>
+    <geo:long>-7.33</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Redondo (&#201;vora)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTSUR0800000007170A</link>
+   <pubDate>Sat, 24 Oct 2026 19:28:51 +0000</pubDate>
+   <guid>c3515988e5f2a1d6997e33cebdf54a42</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTSUR0800000007170A">Redondo</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:28 UTC</li>
+<li>Temperatura: <b>17,0</b> &#186;C (
+M&#225;x.: <b style="color: red">24,3</b> / 
+M&#237;n.: <b style="color: blue">10,0</b> )</li>
+<li>Humedad: <b>40,0</b> % (
+M&#225;x.: <b style="color: red">68,0</b> / 
+M&#237;n.: <b style="color: blue">24,0</b> )</li>
+<li>Bar&#243;metro: <b>1027,7</b> hPa (
+M&#225;x.: <b style="color: red">1030,4</b> / 
+M&#237;n.: <b style="color: blue">1026,3</b> )</li>
+<li>Viento: <b>3,0</b> km/h (
+M&#225;x.: <b style="color: red">17,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>313</b> - NW</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTSUR0800000007170A:DATA>]]
+[[<PTSUR0800000007170A;(17,0;24,3;10,0;moon);(40,0;68,0;24,0);(1027,7;1030,4;1026,3);(3,0;17,0;313);(0,0);Redondo>]]
+[[<END:PTSUR0800000007170A:DATA>]]
+-->
+   </description>
+   <georss:point>38.65 -7.55</georss:point>
+   <geo:Point>
+    <geo:lat>38.65</geo:lat>
+    <geo:long>-7.55</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Sao Martinho do Porto (Leiria)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTCEN1100000002460A</link>
+   <pubDate>Sat, 24 Oct 2026 19:17:00 +0000</pubDate>
+   <guid>9b6957e4614e0d07606c9e968194e832</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTCEN1100000002460A">Sao Martinho do Porto</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:17 UTC</li>
+<li>Temperatura: <b>13,8</b> &#186;C (
+M&#225;x.: <b style="color: red">18,1</b> / 
+M&#237;n.: <b style="color: blue">8,4</b> )</li>
+<li>Humedad: <b>83,0</b> % (
+M&#225;x.: <b style="color: red">93,0</b> / 
+M&#237;n.: <b style="color: blue">69,0</b> )</li>
+<li>Bar&#243;metro: <b>1026,2</b> hPa (
+M&#225;x.: <b style="color: red">1028,2</b> / 
+M&#237;n.: <b style="color: blue">1025,5</b> )</li>
+<li>Viento: <b>7,0</b> km/h (
+M&#225;x.: <b style="color: red">26,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>28</b> - NNE</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTCEN1100000002460A:DATA>]]
+[[<PTCEN1100000002460A;(13,8;18,1;8,4;hazemoon);(83,0;93,0;69,0);(1026,2;1028,2;1025,5);(7,0;26,0;28);(0,0);Sao Martinho do Porto>]]
+[[<END:PTCEN1100000002460A:DATA>]]
+-->
+   </description>
+   <georss:point>39.53 -9.09</georss:point>
+   <geo:Point>
+    <geo:lat>39.53</geo:lat>
+    <geo:long>-9.09</geo:long>
+   </geo:Point>
+  </item>
+  <item>
+   <title>Vouzela (Viseu)</title>
+   <link>http://www.meteoclimatic.net/perfil/PTCEN2000000003670A</link>
+   <pubDate>Sat, 24 Oct 2026 19:16:04 +0000</pubDate>
+   <guid>52198a31492ea6865cc801de297952ce</guid>
+   <description>
+    <![CDATA[
+     <ul>
+<li><div  class="sprite-sem_ok"></div> <a href="http://www.meteoclimatic.net/perfil/PTCEN2000000003670A">Vouzela</a></li>
+<ul>
+<li> Actualizado: 24-10-2026 19:16 UTC</li>
+<li>Temperatura: <b>12,9</b> &#186;C (
+M&#225;x.: <b style="color: red">20,8</b> / 
+M&#237;n.: <b style="color: blue">2,9</b> )</li>
+<li>Humedad: <b>69,0</b> % (
+M&#225;x.: <b style="color: red">92,0</b> / 
+M&#237;n.: <b style="color: blue">40,0</b> )</li>
+<li>Bar&#243;metro: <b>1029,1</b> hPa (
+M&#225;x.: <b style="color: red">1032,1</b> / 
+M&#237;n.: <b style="color: blue">1027,6</b> )</li>
+<li>Viento: <b>6,0</b> km/h (
+M&#225;x.: <b style="color: red">27,0</b> )</li>
+<li>Direcci&#243;n del viento: <b>270</b> - W</li>
+<li>Precip.: <b>0,0</b> mm</li>
+</ul>
+     </ul>
+    ]]>
+<!--
+[[<BEGIN:PTCEN2000000003670A:DATA>]]
+[[<PTCEN2000000003670A;(12,9;20,8;2,9;moon);(69,0;92,0;40,0);(1029,1;1032,1;1027,6);(6,0;27,0;270);(0,0);Vouzela>]]
+[[<END:PTCEN2000000003670A:DATA>]]
+-->
+   </description>
+   <georss:point>40.72 -8.12</georss:point>
+   <geo:Point>
+    <geo:lat>40.72</geo:lat>
+    <geo:long>-8.12</geo:long>
+   </geo:Point>
+  </item> </channel>
+</rss>

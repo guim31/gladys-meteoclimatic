@@ -1,177 +1,936 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Demo Devices Template",
+  "name": "Meteoclimatic",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "Readings of the Meteoclimatic amateur weather stations (Spain, Portugal, Andorra) in Gladys.",
+    "fr": "Les relevés des stations météo amateurs Meteoclimatic (Espagne, Portugal, Andorre) dans Gladys.",
+    "de": "Die Messwerte der Meteoclimatic-Amateurwetterstationen (Spanien, Portugal, Andorra) in Gladys.",
+    "es": "Las lecturas de las estaciones meteorológicas aficionadas Meteoclimatic (España, Portugal, Andorra)."
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
-  "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "docker_image": "ghcr.io/guim31/gladys-meteoclimatic:1.0.0",
+  "gladys_version": ">=5.2.0",
+  "cover_image": "https://raw.githubusercontent.com/guim31/gladys-meteoclimatic/main/cover.png",
+  "categories": ["environment"],
+  "transports": ["cloud"],
+  "location": true,
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "Meteoclimatic stations",
+        "fr": "Stations Meteoclimatic",
+        "de": "Meteoclimatic-Stationen",
+        "es": "Estaciones de Meteoclimatic"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "Meteoclimatic is a network of amateur weather stations in Spain, Portugal and Andorra. Its data is open (CC BY-NC-ND licence), no account needed. Not affiliated with Meteoclimatic.",
+        "fr": "Meteoclimatic est un réseau de stations météo amateurs en Espagne, au Portugal et en Andorre. Ses données sont ouvertes (licence CC BY-NC-ND), sans compte. Non affilié à Meteoclimatic.",
+        "de": "Meteoclimatic ist ein Netz von Amateurwetterstationen in Spanien, Portugal und Andorra. Seine Daten sind offen (Lizenz CC BY-NC-ND), ohne Konto. Nicht mit Meteoclimatic verbunden.",
+        "es": "Meteoclimatic es una red de estaciones meteorológicas aficionadas de España, Portugal y Andorra. Sus datos son abiertos (licencia CC BY-NC-ND), sin cuenta. No afiliado a Meteoclimatic."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://www.meteoclimatic.net/",
+          "label": {
+            "en": "Meteoclimatic map",
+            "fr": "Carte Meteoclimatic",
+            "de": "Meteoclimatic-Karte",
+            "es": "Mapa de Meteoclimatic"
+          }
         }
       ]
     },
     {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
+      "key": "stations",
+      "type": "string",
+      "label": {
+        "en": "Stations",
+        "fr": "Stations",
+        "de": "Stationen",
+        "es": "Estaciones"
       },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
+      "description": {
+        "en": "The codes of the stations to read, separated by commas (10 at most). The code ends the address of the station page (…/perfil/ESCAT0800000008350A). The \"Find stations near a house\" button below lists those around you.",
+        "fr": "Les codes des stations à lire, séparés par des virgules (10 au plus). Le code termine l'adresse de la page de la station (…/perfil/ESCAT0800000008350A). Le bouton « Trouver les stations autour d'une maison » ci-dessous liste celles qui vous entourent.",
+        "de": "Die Codes der zu lesenden Stationen, durch Kommas getrennt (höchstens 10). Der Code steht am Ende der Adresse der Stationsseite (…/perfil/ESCAT0800000008350A). Der Button „Stationen um ein Haus finden“ unten listet die in deiner Nähe auf.",
+        "es": "Los códigos de las estaciones que desea leer, separados por comas (10 como máximo). El código termina la dirección de la página de la estación (…/perfil/ESCAT0800000008350A). El botón «Buscar estaciones alrededor de una casa» más abajo lista las de su zona."
+      },
+      "placeholder": {
+        "en": "e.g. ESCAT0800000008350A",
+        "fr": "ex. ESCAT0800000008350A",
+        "de": "z. B. ESCAT0800000008350A",
+        "es": "p. ej. ESCAT0800000008350A"
+      },
+      "required": false
     },
     {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
-      "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
-      },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
-    },
-    {
-      "key": "unit",
+      "key": "refresh_minutes",
       "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
+      "label": {
+        "en": "Reading interval",
+        "fr": "Fréquence de lecture",
+        "de": "Leseintervall",
+        "es": "Frecuencia de lectura"
+      },
+      "description": {
+        "en": "The stations upload about every 10 minutes; Meteoclimatic is a volunteer network: 10 minutes is the fastest.",
+        "fr": "Les stations envoient leurs relevés toutes les 10 minutes environ ; Meteoclimatic est un réseau bénévole : 10 minutes au plus vite.",
+        "de": "Die Stationen senden etwa alle 10 Minuten; Meteoclimatic ist ein ehrenamtliches Netz: höchstens alle 10 Minuten.",
+        "es": "Las estaciones envían sus lecturas cada 10 minutos aproximadamente; Meteoclimatic es una red de voluntarios: 10 minutos como mínimo."
+      },
       "required": false,
-      "default": "celsius",
+      "default": "15",
       "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
+        {
+          "value": "10",
+          "label": {
+            "en": "Every 10 minutes",
+            "fr": "Toutes les 10 minutes",
+            "de": "Alle 10 Minuten",
+            "es": "Cada 10 minutos"
+          }
+        },
+        {
+          "value": "15",
+          "label": {
+            "en": "Every 15 minutes",
+            "fr": "Toutes les 15 minutes",
+            "de": "Alle 15 Minuten",
+            "es": "Cada 15 minutos"
+          }
+        },
+        {
+          "value": "30",
+          "label": {
+            "en": "Every 30 minutes",
+            "fr": "Toutes les 30 minutes",
+            "de": "Alle 30 Minuten",
+            "es": "Cada 30 minutos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "Every hour",
+            "fr": "Toutes les heures",
+            "de": "Jede Stunde",
+            "es": "Cada hora"
+          }
+        }
       ]
     },
     {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language",
+        "fr": "Langue",
+        "de": "Sprache",
+        "es": "Idioma"
+      },
       "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
+        "en": "Language of the feature names (set when a device is added) and of the scene texts.",
+        "fr": "Langue des noms de fonctionnalités (fixés à l'ajout d'un appareil) et des textes de scène.",
+        "de": "Sprache der Funktionsnamen (beim Hinzufügen eines Geräts festgelegt) und der Szenentexte.",
+        "es": "Idioma de los nombres de las funciones (fijados al añadir un dispositivo) y de los textos de escena."
       },
       "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
+      "default": "fr",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
+          }
+        }
+      ]
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
-    },
-    {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
+      "key": "find_nearby",
+      "label": {
+        "en": "Find stations near a house",
+        "fr": "Trouver les stations autour d'une maison",
+        "de": "Stationen um ein Haus finden",
+        "es": "Buscar estaciones alrededor de una casa"
+      },
+      "description": {
+        "en": "Lists the stations online around the house, nearest first, with their codes.",
+        "fr": "Liste les stations en ligne autour de la maison, de la plus proche à la plus lointaine, avec leurs codes.",
+        "de": "Listet die Stationen online um das Haus auf, die nächste zuerst, mit ihren Codes.",
+        "es": "Lista las estaciones conectadas alrededor de la casa, de la más cercana a la más lejana, con sus códigos."
+      },
+      "timeout_seconds": 60,
       "fields": [
         {
-          "key": "device",
+          "key": "house",
           "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "source": "houses",
+          "label": {
+            "en": "House",
+            "fr": "Maison",
+            "de": "Haus",
+            "es": "Casa"
+          },
+          "description": {
+            "en": "Its location is set in Settings → Houses. Empty: the first located house.",
+            "fr": "Sa position se règle dans Paramètres → Maisons. Vide : la première maison située.",
+            "de": "Sein Standort wird unter Einstellungen → Häuser festgelegt. Leer: das erste Haus mit Standort.",
+            "es": "Su ubicación se define en Ajustes → Casas. Vacío: la primera casa con ubicación."
+          },
+          "required": false
+        },
+        {
+          "key": "radius_km",
+          "type": "select",
+          "label": {
+            "en": "Radius",
+            "fr": "Rayon",
+            "de": "Radius",
+            "es": "Radio"
+          },
+          "description": {
+            "en": "Empty: 10 km.",
+            "fr": "Vide : 10 km.",
+            "de": "Leer: 10 km.",
+            "es": "Vacío: 10 km."
+          },
+          "required": false,
+          "options": [
+            {
+              "value": "5",
+              "label": {
+                "en": "5 km",
+                "fr": "5 km",
+                "de": "5 km",
+                "es": "5 km"
+              }
+            },
+            {
+              "value": "10",
+              "label": {
+                "en": "10 km",
+                "fr": "10 km",
+                "de": "10 km",
+                "es": "10 km"
+              }
+            },
+            {
+              "value": "25",
+              "label": {
+                "en": "25 km",
+                "fr": "25 km",
+                "de": "25 km",
+                "es": "25 km"
+              }
+            },
+            {
+              "value": "50",
+              "label": {
+                "en": "50 km",
+                "fr": "50 km",
+                "de": "50 km",
+                "es": "50 km"
+              }
+            }
+          ]
         }
       ]
+    },
+    {
+      "key": "check_stations",
+      "label": {
+        "en": "Check the stations",
+        "fr": "Vérifier les stations",
+        "de": "Stationen prüfen",
+        "es": "Comprobar las estaciones"
+      },
+      "description": {
+        "en": "Reads each station now and tells how old its last reading is.",
+        "fr": "Lit chaque station maintenant et indique l'âge de son dernier relevé.",
+        "de": "Liest jede Station jetzt und zeigt das Alter ihrer letzten Messung.",
+        "es": "Lee cada estación ahora e indica la antigüedad de su última lectura."
+      },
+      "timeout_seconds": 120
     }
   ],
   "scene_triggers": [
     {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
+      "key": "rain_started",
+      "label": {
+        "en": "Meteoclimatic: it starts raining",
+        "fr": "Meteoclimatic : il commence à pleuvoir",
+        "de": "Meteoclimatic: Es beginnt zu regnen",
+        "es": "Meteoclimatic: empieza a llover"
+      },
       "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
+        "en": "The rain of the day grows again after 30 minutes without. Fires once per rain episode.",
+        "fr": "La pluie du jour augmente après 30 minutes sans. Se déclenche une fois par épisode de pluie.",
+        "de": "Der Regen des Tages steigt nach 30 Minuten ohne wieder an. Löst einmal pro Regenepisode aus.",
+        "es": "La lluvia del día vuelve a aumentar tras 30 minutos sin ella. Se activa una vez por episodio de lluvia."
       },
       "fields": [
         {
           "key": "device",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "rain_today_mm",
+          "type": "number",
+          "label": {
+            "en": "Rain today (mm)",
+            "fr": "Pluie du jour (mm)",
+            "de": "Regen heute (mm)",
+            "es": "Lluvia del día (mm)"
+          }
         },
         {
-          "key": "target",
-          "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        }
+      ]
+    },
+    {
+      "key": "rain_stopped",
+      "label": {
+        "en": "Meteoclimatic: the rain stops",
+        "fr": "Meteoclimatic : la pluie s'arrête",
+        "de": "Meteoclimatic: Der Regen hört auf",
+        "es": "Meteoclimatic: deja de llover"
+      },
+      "description": {
+        "en": "The rain of the day stopped growing for the chosen time, after rain. Fires once per dry spell.",
+        "fr": "La pluie du jour n'augmente plus depuis la durée choisie, après de la pluie. Se déclenche une fois par accalmie.",
+        "de": "Der Regen des Tages steigt seit der gewählten Dauer nicht mehr, nach Regen. Löst einmal pro Trockenphase aus.",
+        "es": "La lluvia del día ha dejado de aumentar durante el tiempo elegido, tras llover. Se activa una vez por periodo seco."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "after_minutes",
+          "type": "select",
+          "required": true,
+          "default": "60",
+          "label": {
+            "en": "Dry for",
+            "fr": "Sans pluie depuis",
+            "de": "Trocken seit",
+            "es": "Sin lluvia desde hace"
+          },
           "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
+            {
+              "value": "30",
+              "label": {
+                "en": "30 minutes",
+                "fr": "30 minutes",
+                "de": "30 Minuten",
+                "es": "30 minutos"
+              }
+            },
+            {
+              "value": "60",
+              "label": {
+                "en": "1 hour",
+                "fr": "1 heure",
+                "de": "1 Stunde",
+                "es": "1 hora"
+              }
+            },
+            {
+              "value": "120",
+              "label": {
+                "en": "2 hours",
+                "fr": "2 heures",
+                "de": "2 Stunden",
+                "es": "2 horas"
+              }
+            },
+            {
+              "value": "180",
+              "label": {
+                "en": "3 hours",
+                "fr": "3 heures",
+                "de": "3 Stunden",
+                "es": "3 horas"
+              }
+            }
           ]
         }
       ],
       "variables": [
         {
-          "key": "target",
+          "key": "rain_today_mm",
+          "type": "number",
+          "label": {
+            "en": "Rain today (mm)",
+            "fr": "Pluie du jour (mm)",
+            "de": "Regen heute (mm)",
+            "es": "Lluvia del día (mm)"
+          }
+        },
+        {
+          "key": "station",
           "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        }
+      ]
+    },
+    {
+      "key": "gust_above",
+      "label": {
+        "en": "Meteoclimatic: strong wind",
+        "fr": "Meteoclimatic : vent fort",
+        "de": "Meteoclimatic: Starker Wind",
+        "es": "Meteoclimatic: viento fuerte"
+      },
+      "description": {
+        "en": "The strongest wind of the day passes the chosen speed. Fires once per day.",
+        "fr": "Le vent max. du jour dépasse la vitesse choisie. Se déclenche une fois par jour.",
+        "de": "Der stärkste Wind des Tages überschreitet die gewählte Geschwindigkeit. Löst einmal pro Tag aus.",
+        "es": "El viento máximo del día supera la velocidad elegida. Se activa una vez al día."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "above_kmh",
+          "type": "select",
+          "required": true,
+          "default": "60",
+          "label": {
+            "en": "Above",
+            "fr": "Au-delà de",
+            "de": "Über",
+            "es": "Por encima de"
+          },
+          "options": [
+            {
+              "value": "30",
+              "label": {
+                "en": "30 km/h",
+                "fr": "30 km/h",
+                "de": "30 km/h",
+                "es": "30 km/h"
+              }
+            },
+            {
+              "value": "40",
+              "label": {
+                "en": "40 km/h",
+                "fr": "40 km/h",
+                "de": "40 km/h",
+                "es": "40 km/h"
+              }
+            },
+            {
+              "value": "50",
+              "label": {
+                "en": "50 km/h",
+                "fr": "50 km/h",
+                "de": "50 km/h",
+                "es": "50 km/h"
+              }
+            },
+            {
+              "value": "60",
+              "label": {
+                "en": "60 km/h",
+                "fr": "60 km/h",
+                "de": "60 km/h",
+                "es": "60 km/h"
+              }
+            },
+            {
+              "value": "70",
+              "label": {
+                "en": "70 km/h",
+                "fr": "70 km/h",
+                "de": "70 km/h",
+                "es": "70 km/h"
+              }
+            },
+            {
+              "value": "80",
+              "label": {
+                "en": "80 km/h",
+                "fr": "80 km/h",
+                "de": "80 km/h",
+                "es": "80 km/h"
+              }
+            },
+            {
+              "value": "90",
+              "label": {
+                "en": "90 km/h",
+                "fr": "90 km/h",
+                "de": "90 km/h",
+                "es": "90 km/h"
+              }
+            },
+            {
+              "value": "100",
+              "label": {
+                "en": "100 km/h",
+                "fr": "100 km/h",
+                "de": "100 km/h",
+                "es": "100 km/h"
+              }
+            },
+            {
+              "value": "120",
+              "label": {
+                "en": "120 km/h",
+                "fr": "120 km/h",
+                "de": "120 km/h",
+                "es": "120 km/h"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "wind_max_kmh",
+          "type": "number",
+          "label": {
+            "en": "Strongest wind (km/h)",
+            "fr": "Vent max. (km/h)",
+            "de": "Stärkster Wind (km/h)",
+            "es": "Viento máximo (km/h)"
+          }
+        },
+        {
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        }
+      ]
+    },
+    {
+      "key": "station_silent",
+      "label": {
+        "en": "Meteoclimatic: station silent",
+        "fr": "Meteoclimatic : station muette",
+        "de": "Meteoclimatic: Station stumm",
+        "es": "Meteoclimatic: estación sin datos"
+      },
+      "description": {
+        "en": "No new reading for the chosen time. Fires once per silence.",
+        "fr": "Plus de nouveau relevé depuis la durée choisie. Se déclenche une fois par silence.",
+        "de": "Keine neue Messung seit der gewählten Dauer. Löst einmal pro Funkstille aus.",
+        "es": "Ninguna lectura nueva durante el tiempo elegido. Se activa una vez por silencio."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "after_minutes",
+          "type": "select",
+          "required": true,
+          "default": "120",
+          "label": {
+            "en": "Silent for",
+            "fr": "Muette depuis",
+            "de": "Stumm seit",
+            "es": "Sin datos desde hace"
+          },
+          "options": [
+            {
+              "value": "60",
+              "label": {
+                "en": "1 hour",
+                "fr": "1 heure",
+                "de": "1 Stunde",
+                "es": "1 hora"
+              }
+            },
+            {
+              "value": "120",
+              "label": {
+                "en": "2 hours",
+                "fr": "2 heures",
+                "de": "2 Stunden",
+                "es": "2 horas"
+              }
+            },
+            {
+              "value": "240",
+              "label": {
+                "en": "4 hours",
+                "fr": "4 heures",
+                "de": "4 Stunden",
+                "es": "4 horas"
+              }
+            },
+            {
+              "value": "720",
+              "label": {
+                "en": "12 hours",
+                "fr": "12 heures",
+                "de": "12 Stunden",
+                "es": "12 horas"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "silent_minutes",
+          "type": "number",
+          "label": {
+            "en": "Minutes without reading",
+            "fr": "Minutes sans relevé",
+            "de": "Minuten ohne Messung",
+            "es": "Minutos sin lectura"
+          }
+        },
+        {
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        }
+      ]
+    },
+    {
+      "key": "station_back",
+      "label": {
+        "en": "Meteoclimatic: station back",
+        "fr": "Meteoclimatic : retour de la station",
+        "de": "Meteoclimatic: Station wieder da",
+        "es": "Meteoclimatic: la estación vuelve"
+      },
+      "description": {
+        "en": "A new reading after a silence of an hour at least.",
+        "fr": "Un nouveau relevé après un silence d'une heure au moins.",
+        "de": "Eine neue Messung nach mindestens einer Stunde Funkstille.",
+        "es": "Una nueva lectura tras un silencio de al menos una hora."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "silent_minutes",
+          "type": "number",
+          "label": {
+            "en": "Minutes without reading",
+            "fr": "Minutes sans relevé",
+            "de": "Minuten ohne Messung",
+            "es": "Minutos sin lectura"
+          }
+        },
+        {
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
         }
       ]
     }
   ],
   "scene_actions": [
     {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
+      "key": "get_readings",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "Meteoclimatic: station readings",
+        "fr": "Meteoclimatic : relevés de la station",
+        "de": "Meteoclimatic: Messwerte der Station",
+        "es": "Meteoclimatic: lecturas de la estación"
       },
-      "timeout_seconds": 15,
+      "description": {
+        "en": "The last reading of a station, as a sentence ready for a message, with its values.",
+        "fr": "Le dernier relevé d'une station, en une phrase prête pour un message, avec ses valeurs.",
+        "de": "Die letzte Messung einer Station, als Satz für eine Nachricht, mit ihren Werten.",
+        "es": "La última lectura de una estación, en una frase lista para un mensaje, con sus valores."
+      },
       "fields": [
         {
-          "key": "device",
+          "key": "station",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "required": false,
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Empty: the first station added.",
+            "fr": "Vide : la première station ajoutée.",
+            "de": "Leer: die zuerst hinzugefügte Station.",
+            "es": "Vacío: la primera estación añadida."
+          }
         }
       ],
       "outputs": [
         {
-          "key": "signalled",
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Readings sentence",
+            "fr": "Phrase des relevés",
+            "de": "Satz der Messwerte",
+            "es": "Frase de las lecturas"
+          }
+        },
+        {
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        },
+        {
+          "key": "temperature",
+          "type": "number",
+          "label": {
+            "en": "Temperature (°C)",
+            "fr": "Température (°C)",
+            "de": "Temperatur (°C)",
+            "es": "Temperatura (°C)"
+          }
+        },
+        {
+          "key": "temperature_max",
+          "type": "number",
+          "label": {
+            "en": "Today's high (°C)",
+            "fr": "Température max. du jour (°C)",
+            "de": "Tageshöchstwert (°C)",
+            "es": "Máxima del día (°C)"
+          }
+        },
+        {
+          "key": "temperature_min",
+          "type": "number",
+          "label": {
+            "en": "Today's low (°C)",
+            "fr": "Température min. du jour (°C)",
+            "de": "Tagestiefstwert (°C)",
+            "es": "Mínima del día (°C)"
+          }
+        },
+        {
+          "key": "humidity",
+          "type": "number",
+          "label": {
+            "en": "Humidity (%)",
+            "fr": "Humidité (%)",
+            "de": "Luftfeuchtigkeit (%)",
+            "es": "Humedad (%)"
+          }
+        },
+        {
+          "key": "pressure",
+          "type": "number",
+          "label": {
+            "en": "Pressure (hPa)",
+            "fr": "Pression (hPa)",
+            "de": "Luftdruck (hPa)",
+            "es": "Presión (hPa)"
+          }
+        },
+        {
+          "key": "wind_speed",
+          "type": "number",
+          "label": {
+            "en": "Wind (km/h)",
+            "fr": "Vent (km/h)",
+            "de": "Wind (km/h)",
+            "es": "Viento (km/h)"
+          }
+        },
+        {
+          "key": "wind_max",
+          "type": "number",
+          "label": {
+            "en": "Today's strongest wind (km/h)",
+            "fr": "Vent max. du jour (km/h)",
+            "de": "Stärkster Wind heute (km/h)",
+            "es": "Viento máximo del día (km/h)"
+          }
+        },
+        {
+          "key": "rain_today",
+          "type": "number",
+          "label": {
+            "en": "Rain today (mm)",
+            "fr": "Pluie du jour (mm)",
+            "de": "Regen heute (mm)",
+            "es": "Lluvia del día (mm)"
+          }
+        },
+        {
+          "key": "age_minutes",
+          "type": "number",
+          "label": {
+            "en": "Reading age (min)",
+            "fr": "Âge du relevé (min)",
+            "de": "Alter der Messung (Min.)",
+            "es": "Antigüedad de la lectura (min)"
+          }
+        },
+        {
+          "key": "online",
           "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
+          "label": {
+            "en": "Station online",
+            "fr": "Station en ligne",
+            "de": "Station online",
+            "es": "Estación conectada"
+          }
         }
       ]
     }
   ],
   "widgets": [
     {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
+      "key": "station",
+      "icon": "cloud-drizzle",
+      "label": {
+        "en": "Meteoclimatic station",
+        "fr": "Station Meteoclimatic",
+        "de": "Meteoclimatic-Station",
+        "es": "Estación de Meteoclimatic"
       },
-      "icon": "activity",
-      "action_timeout_seconds": 15
+      "description": {
+        "en": "Current readings of a Meteoclimatic station, with the high and low of the day.",
+        "fr": "Relevés actuels d'une station Meteoclimatic, avec les extrêmes du jour.",
+        "de": "Aktuelle Messwerte einer Meteoclimatic-Station, mit den Tageswerten.",
+        "es": "Lecturas actuales de una estación de Meteoclimatic, con los extremos del día."
+      },
+      "settings": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Empty: the first station added.",
+            "fr": "Vide : la première station ajoutée.",
+            "de": "Leer: die zuerst hinzugefügte Station.",
+            "es": "Vacío: la primera estación añadida."
+          }
+        }
+      ]
     }
   ]
 }

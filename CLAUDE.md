@@ -5,7 +5,9 @@ contributors.
 
 ## What this is
 
-A Gladys Assistant **external integration**: a Node.js service (Node 22+, ESM,
+A Gladys Assistant **external integration** for the
+[Meteoclimatic](https://www.meteoclimatic.net/) amateur weather station
+network (Spain, Portugal, Andorra): a Node.js service (Node 22+, ESM,
 no build step) that runs in its own sandboxed Docker container and talks to
 Gladys through
 [`@gladysassistant/integration-sdk`](https://github.com/GladysAssistant/integration-sdk-js),
@@ -31,16 +33,25 @@ pushing.
 ## Architecture
 
 ```
-index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
-src/scenes.js                     scene action handlers (manifest `scene_actions`)
-src/widgets.js                    dashboard widget handlers (manifest `widgets`)
+index.js                          SDK wiring only: registerHandlers, shutdown
+src/app.js                        every handler, registered before connect(); testable on the fake Gladys
 src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
+src/api.js                        Meteoclimatic RSS feeds: fetch (ISO-8859-15), parse, distances
+src/devices.js                    discovery payload of a station (features, external ids)
+src/hub.js                        records (what each station measures, last reading), states, scene events
+src/triggers.js                   scene triggers of a station, as transitions (rain, wind, silence)
+src/poller.js                     the container's own timer (Gladys#3198), onPoll fallback
+src/store.js                      /data/stations.json (atomic writes)
+src/issues.js                     a failure logged once, its recovery once
+src/actions.js                    Configuration buttons: find_nearby, check_stations
+src/scenes.js                     scene action get_readings
+src/widgets.js                    widget station
+src/i18n.js                       every user-facing text, en/fr/de/es
 gladys-assistant-integration.json manifest: name, config_schema, actions, image...
-docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
+docs/{en,fr,de,es}.md             user documentation, re-hosted by Gladys (same sections)
 test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
+test/helpers/                     simulated Meteoclimatic (network.js), test world (world.js)
+test/fixtures/feeds/              feeds recorded from the live service (ISO-8859-15 bytes)
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -70,8 +81,10 @@ test/                             node --test, against the SDK's fake Gladys (in
   `type: "provider"`: 5.1.0). `test/manifest.test.js` ties the manifest to the
   code (defaults, action, scene and widget handlers): change both sides
   together.
-- **User-facing text** is bilingual (English and French): action messages,
-  manifest texts, and `docs/en.md` / `docs/fr.md`, kept in sync.
+- **User-facing text** exists in four languages (English, French, German with
+  "du", Spanish with "usted"): action messages, manifest texts, widget and
+  scene texts, feature names, and `docs/{en,fr,de,es}.md` with the same
+  sections. `test/i18n.test.js` enforces it.
 - **Style.** Prettier formats, ESLint catches mistakes. Comments explain why,
   in English. Tests never touch the network.
 
@@ -233,3 +246,40 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 - Docs `en`, `fr`, `de`, `es` avec les mêmes sections.
 - Chauffe, ouverture, sécurité : ne rien rendre pilotable « comme un thermostat » ou par un assistant
   vocal quand une erreur serait dangereuse (leçon d'OctoPrint).
+
+## Meteoclimatic : API et pièges (cette intégration)
+
+- **Une seule source** : les flux RSS publics `https://www.meteoclimatic.net/feed/rss/<code>`, sans
+  compte ni clé. `<code>` est une station (`ESCAT0800000008350A`) ou une zone (`ES`, `ESCAT`,
+  `ESCAT08`, `PT`, `AD`). Les codes de la Communauté valencienne commencent par `ESPVA`, pas
+  `ESVAL` (vérifié le 24/10/2026 : `ESVAL` répond un flux vide).
+- **En-tête `Accept`** : tout `Accept` qui nomme des types XML (`application/rss+xml, application/xml`)
+  reçoit un **HTTP 406** (le serveur sert `application/xml+rss`) ; envoyer `*/*`. Trouvé par le test
+  réel dans le conteneur, le faux réseau des tests le reproduit.
+- **Encodage ISO-8859-15**, entités HTML dans les noms (`Alcorc&#243;n`) : décodé par
+  `TextDecoder('iso-8859-15')` (ICU complet, présent dans l'image node:alpine officielle).
+- **Lire le bloc de données en commentaire**, pas le HTML : `[[<CODE;(t;tmax;tmin;ciel);(h;hmax;hmin);
+(p;pmax;pmin);(vent;ventmax;direction);(pluie);nom>]]`, décimales à virgule. **`-99` = capteur
+  absent** (vu sur le réseau réel : sans anémomètre, baromètre, hygromètre ou pluviomètre). Le
+  « vent max. » est le **maximum du jour**, la pluie le **cumul du jour** : aucune valeur
+  instantanée de rafale ni d'intensité de pluie. Heure du relevé : `<pubDate>` de l'item.
+- **Un flux ne liste que les stations ayant envoyé depuis une heure environ** (les 1 538 stations
+  de `ES` étaient toutes du jour). Station hors ligne et code inconnu donnent le même flux vide
+  (HTTP 200, aucun `<item>`) : indiscernables. Un code de zone donne d'autres stations : signalé
+  par `check_stations`.
+- **Recherche autour de la maison** : les trois flux `ES`, `PT`, `AD` (≈ 2,2 Mo, 1 550 stations), lus
+  à la demande seulement, distance calculée dans le conteneur : la position de la maison ne sort
+  jamais. `FR` répond vide. Les positions GeoRSS sont arrondies à 0,01°.
+- **Licence CC BY-NC-ND 3.0** (dans le flux) : données montrées telles quelles, source citée dans le
+  widget, les docs et le README.
+- **Politesse** : 10 min au plus vite (les stations envoient toutes les 10 min environ), 15 par
+  défaut, 10 stations au plus, lues l'une après l'autre, `User-Agent` qui nomme le dépôt.
+- **Valeur périmée** au-delà de 60 min : plus publiée, seul l'« âge du relevé » avance ; au retour,
+  tout est republié (`forgetPublishedStates`).
+- **Déclencheurs** sur les hausses des cumuls du jour. Le jour se lit sur la date locale de `pubDate`
+  (fuseau `TZ` injecté par Gladys, celui de la maison) : un relevé d'un nouveau jour se compare à 0,
+  une baisse dans la journée (redémarrage de la station) ne déclenche rien. « La pluie s'arrête »
+  exige un relevé qui montre la durée sans hausse (une station muette après la pluie ne prouve rien).
+  Le premier relevé après démarrage sert de référence ; « retour de la station » ne vaut que pour un
+  silence commencé pendant que le conteneur tournait ; ni silence ni retour pendant une panne de
+  Meteoclimatic lui-même (relecture du 24/10/2026).
