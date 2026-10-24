@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-24
+
 ### Added
 
 - One device per Meteoclimatic station: temperature, high and low of the day,
@@ -27,4 +29,5 @@ the notes of the version's GitHub Release.
 - Feature names, messages and documentation in English, French, German and
   Spanish.
 
-[Unreleased]: https://github.com/guim31/gladys-meteoclimatic/commits/main
+[Unreleased]: https://github.com/guim31/gladys-meteoclimatic/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/guim31/gladys-meteoclimatic/releases/tag/v1.0.0
