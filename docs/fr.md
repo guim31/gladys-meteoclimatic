@@ -27,7 +27,7 @@ Lecture seule : l'intégration ne modifie jamais rien sur une station.
 
 ## Prérequis
 
-- Gladys Assistant **5.2.0** ou plus récent.
+- Gladys Assistant **5.3.0** ou plus récent.
 - Un accès à Internet (les flux publics de meteoclimatic.net).
 - Pour la recherche autour de la maison : la position de votre maison,
   renseignée dans **Paramètres → Maisons**. L'intégration demande l'accès aux

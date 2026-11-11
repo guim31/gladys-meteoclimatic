@@ -33,7 +33,7 @@ The user documentation, shown in Gladys, is in [`docs/`](docs/en.md)
 
 ## Requirements
 
-- Gladys Assistant 5.2.0 or later.
+- Gladys Assistant 5.3.0 or later.
 - Internet access to `www.meteoclimatic.net`.
 - For the nearby search: the location of the house, in Settings → Houses.
 

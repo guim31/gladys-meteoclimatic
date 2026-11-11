@@ -29,7 +29,7 @@ Nur lesend: Die Integration ändert nie etwas an einer Station.
 
 ## Voraussetzungen
 
-- Gladys Assistant **5.2.0** oder neuer.
+- Gladys Assistant **5.3.0** oder neuer.
 - Internetzugang (die öffentlichen Feeds von meteoclimatic.net).
 - Für die Suche um das Haus: der Standort deines Hauses, festgelegt unter
   **Einstellungen → Häuser**. Die Integration bittet auf dem
